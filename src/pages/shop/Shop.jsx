@@ -1,23 +1,17 @@
-import React, { Component } from 'react';
-import SHOP_DATA from './shop.data';
-import PrevievCollecton from '../../components/previewCollection/PrevievCollecton';
+import React from 'react';
+import { Route } from 'react-router-dom';
+import CollectionPage from '../collection/collection';
 
-class Shop extends Component {
-  constructor() {
-    super();
-    this.state = {
-      collections: SHOP_DATA
-    };
-  }
-  render() {
-    return (
-      <div className='shop-page'>
-        {this.state.collections.map(({ id, ...otherCollectionProps }) => {
-          return <PrevievCollecton key={id} {...otherCollectionProps} />;
-        })}
-      </div>
-    );
-  }
-}
+import CollectionsOvervie from '../../components/collectionsOvervie/CollectionsOvervie';
+
+const Shop = ({ match }) => {
+  console.log(match);
+  return (
+    <div className='shop-page'>
+      <Route exact path={`${match.path}`} component={CollectionsOvervie} />
+      <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+    </div>
+  );
+};
 
 export default Shop;
